@@ -15,9 +15,6 @@
 .navbar-collapse{
     justify-content: between;
 }
-.navbar-toggler{
-    background:#fff !important;
-}
 .header{
     background-image: url('../images/mount.jpg');
     background-attachment: fixed;
