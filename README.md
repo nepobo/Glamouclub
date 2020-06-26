@@ -1,1 +1,0 @@
-My first project on GitHub for Glazov MOuntain Club.
