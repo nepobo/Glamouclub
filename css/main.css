@@ -1,5 +1,9 @@
+body {
+    padding-top: 210px;
+    padding-bottom: 70px;
+}
 .navbar{
-    background:#000099;
+    background: #040497;
 }
 .nav-link , .navbar-brand{
     color: #f4f4f4;
@@ -29,28 +33,8 @@
     top: 0;
     background: rgba(244, 244, 244, 0.79);
 }
-.description{
-    position: absolute;
-    top: 30%;
-    margin: auto;
-    padding: 2em;
-}
-.description h1{
-    color:#F97300 ;
-}
-.description p{
-    color:#666;
-    font-size: 20px;
-    width: 50%;
-    line-height: 1.5;
-}
-.description button{
-    border:1px  solid #F97300;
-    background:#F97300;
-    color:#fff;
-}
 .about{
-    margin: 4em 0;
+    margin: 1em 0;
     padding: 1em;
     position: relative;
 }
@@ -59,15 +43,12 @@
     margin: 2em;
 }
 .about img{
-    height: 100%;
-    width: 100%;
-    border-radius: 20%
+    border-radius: 80%
 }
 .about span{
-    display: block;
+    background-color: #c2f8c4;
     color: #f30303;
-    position: absolute;
-    left: 115px;
+    font-weight:bold;
 }
 .about .desc{
     padding: 2em;
@@ -79,4 +60,7 @@
 .about .desc p{
     line-height:2;
     color:#888;
+}
+.bot {
+    color: aliceblue;
 }
