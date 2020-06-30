@@ -64,3 +64,50 @@ body {
 .bot {
     color: aliceblue;
 }
+.trips{
+    margin: 1em 1em;
+    padding: 1em;
+    position: relative;
+}
+.trips h1{
+    color: blue;
+    font-size: large;
+}
+.trips label{
+    font-weight:bold;
+    color: #0c990d;
+}
+.trips option{
+    color: red;
+    font-weight:bold;
+}
+.trips select{
+    font-weight:bold;
+    color: blue;
+}
+
+.news label{
+    color: blue;
+    font-size: x-large;
+}
+.text-border textarea {
+    border: 2px solid #d800fd;
+}
+
+.workouts{
+    margin: 1em 1em;
+    padding: 1em;
+    position: relative;
+}
+
+.workouts label{
+    color: #0c990d;
+    font-weight:bold;
+}
+.workouts button{
+    margin: 1em 1em;
+}
+.workouts h1{
+    color: #000000;
+    font-size: x-large;
+}
