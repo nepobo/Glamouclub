@@ -1,0 +1,129 @@
+body {
+    padding-top: 210px;
+    padding-bottom: 70px;
+}
+.navbar{
+    background: #040497;
+}
+.nav-link , .navbar-brand{
+    color: #f4f4f4;
+    cursor: pointer;
+}
+.nav-link{
+    margin-right: 1em !important;
+}
+.nav-link:hover{
+    background: #f4f4f4;
+    color: #f97300;
+}
+.navbar-collapse{
+    justify-content: between;
+}
+.header{
+    background-image: url('../images/mount.jpg');
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+}
+.overlay{
+    position: absolute;
+    min-height: 100%;
+    min-width: 100%;
+    left: 0;
+    top: 0;
+    background: rgba(244, 244, 244, 0.79);
+}
+.about{
+    margin: 1em 0;
+    padding: 1em;
+    position: relative;
+}
+.about h1{
+    color:#F97300;
+    margin: 1em;
+
+}
+.about img{
+    border-radius: 80%
+}
+.about span{
+    background-color: #c2f8c4;
+    color: #f30303;
+    font-weight:bold;
+    font-size: small;
+}
+.about .desc{
+    padding: 1em;
+    border-left:4px solid #0000ff;
+}
+.about .desc h3{
+    color: #0000ff;
+    font-size: large;
+}
+.about .desc p{
+    line-height:2;
+    color:#888;
+}
+.bot {
+    color: aliceblue;
+}
+.trips{
+    margin: 1em 2em;
+    position: relative;
+}
+.trips h1{
+    margin: 1em 0em ;
+    color: black;
+    font-size: x-large;
+}
+.trips label{
+    font-size:large;
+    color: black;
+}
+.trips option{
+    color: red;
+    font-weight:bold;
+}
+.trips select{
+    font-weight:bold;
+    color: blue;
+}
+
+.news label{
+    color: black;
+    font-size: x-large;
+}
+.text-border textarea {
+    border: 2px solid #0000ff;
+}
+
+.workouts{
+    margin: 1em 1em;
+    position: relative;
+}
+
+.workouts label{
+    font-family: cursive;
+    color: #009900;
+    font-size:large;
+}
+.workouts button{
+    margin: 1em 1em;
+}
+.workouts h1{
+    color: #000000;
+    font-size: x-large;
+}
+
+.forum{
+    margin: 1em 1em;
+    position: relative;
+}
+
+.forum label{
+    color: black;
+    font-size: x-large;
+}
+.forum button{
+    margin: 1em 1em;
+}
