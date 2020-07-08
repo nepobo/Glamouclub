@@ -1,0 +1,33 @@
+extends layout
+
+block content
+  <div class="container-fluid trips ">
+  <div class="row">
+  <div class="col-6 border border-dark rounded">
+  <h1>График походов</h1>
+  <form>
+  <div class="form-group">
+  <label for="FormTypeOfTrips">Вид похода</label>
+  <select class="form-control " id="FormTypeOfTrips">
+  <option>Горный</option>
+  <option>Велопоход</option>
+  <option>Сплав</option>
+  <option>Пеший</option>
+  </select>
+  </div>
+  <div class="form-group">
+  <label for="TypeOfMembers">Вид похода</label>
+  <select class="form-control" id="TypeOfMembers">
+  <option>Новичек</option>
+  <option>Бывалые</option>
+  <option>Мастера</option>
+  </select>
+  </div>
+  <div class="form-group">
+  <label for="ListOfTrips">Доступные походы</label>
+  <textarea class="form-control" id="ListOfTrips" rows="10"></textarea>
+  </div>
+  </form>
+  </div>
+  </div>
+  </div>

@@ -1,0 +1,47 @@
+extends layout
+
+block content
+  <div class="container-fluid workouts">
+  <div class="row">
+  <div class="col-6 border border-dark rounded">
+  <h1>Запись на тренировки</h1>
+  <form>
+  <div class="form-group">
+  <label for="Name">Ваше Фамилия Имя</label>
+  <input type="text" class="form-control " id="Name">
+  </div>
+  <div class="custom-control custom-checkbox">
+  <input type="checkbox" class="custom-control-input" id="Sunday">
+  <label class="custom-control-label" for="Sunday">Воскресенье</label>
+  </div>
+  <div class="custom-control custom-checkbox">
+  <input type="checkbox" class="custom-control-input" id="Monday">
+  <label class="custom-control-label" for="Monday">Понедельник</label>
+  </div>
+  <div class="custom-control custom-checkbox">
+  <input type="checkbox" class="custom-control-input" id="Tuesday">
+  <label class="custom-control-label" for="Tuesday">Вторник</label>
+  </div>
+  <div class="custom-control custom-checkbox">
+  <input type="checkbox" class="custom-control-input" id="Whedneday" checked>
+  <label class="custom-control-label" for="Whedneday">Среда</label>
+  </div>
+  <div class="custom-control custom-checkbox">
+  <input type="checkbox" class="custom-control-input" id="Thursday">
+  <label class="custom-control-label" for="Thursday">Четверг</label>
+  </div>
+  <div class="custom-control custom-checkbox">
+  <input type="checkbox" class="custom-control-input" id="Friday" checked>
+  <label class="custom-control-label" for="Friday">Пятница</label>
+  </div>
+  <div class="custom-control custom-checkbox">
+  <input type="checkbox" class="custom-control-input" id="Saturday">
+  <label class="custom-control-label" for="Saturday">Суббота</label>
+  </div>
+  <div>
+  <button type="button" class="btn btn-primary">Записаться</button>
+  </div>
+  </form>
+  </div>
+  </div>
+  </div>
