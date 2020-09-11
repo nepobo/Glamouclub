@@ -1,23 +1,16 @@
 extends layout
 
 block content
-  <div class="container-fluid forum">
-  <div class="row">
-  <div class="col-10 border border-dark rounded">
-  <form>
-  <div class="form-group">
-  <label for="Questione">Задайте свой вопрос</label>
-  <textarea class="form-control" id="Questione" rows="2"></textarea>
-  </div>
-  <div class="text-right">
-  <button type="button" class="btn btn-primary">Отправить</button>
-  <button type="button" class="btn btn-primary">Отмена</button>
-  </div>
-  <div class="form-group">
-  <label for="Responds">Ответы на вопросы</label>
-  <textarea class="form-control" id="Responds" rows="10"></textarea>
-  </div>
-  </form>
-  </div>
-  </div>
-  </div>
+  div(class="container-fluid forum")
+    div(class="row")
+      div(class="col-10 border border-dark rounded")
+        form
+          div(class="form-group")
+            label(for="Questione") Задайте свой вопрос
+            textarea(class="form-control",id="Questione",rows="2")
+          div(class="text-right")
+            button(type="button",class="btn btn-primary") Отправить
+            button(type="button",class="btn btn-primary") Отмена
+          div(class="form-group")
+            label(for="Responds") Ответы на вопросы
+            textarea(class="form-control",id="Responds",rows="10")

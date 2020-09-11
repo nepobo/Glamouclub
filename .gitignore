@@ -2,6 +2,7 @@
 /shelf/
 /workspace.xml
 /.idea/
+/a.bat
 /node_modules/
 # Editor-based HTTP Client requests
 /httpRequests/
