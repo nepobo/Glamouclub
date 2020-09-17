@@ -1,0 +1,23 @@
+﻿extends layout
+
+block content
+  div(class="container-fluid trips")
+    div(class="row")
+      div(class="col-6 border border-dark rounded")
+        h1 Администрирование сайта
+        form
+          div(class="form-group")
+            label(for="FormTypeOfTrips") Выберите базу
+            select(class="form-control",id="TablesName")
+              - for (var x = 0; x < user.length; x++)
+                option #{user[x].table_name}
+          div(class="form-group")
+            label(for="TypeOfMembers") Вид похода
+            select(class="form-control",id="TypeOfMembers")
+              option Новичек
+              option Бывалые
+              option Мастера
+          div(class="form-group")
+            label(for="ListOfTrips") Доступные походы>
+            textarea(class="form-control",id="ListOfTrips",rows="5")
+          button(type="submit",class="btn btn-primary",style="display: block; margin-left: auto;") Получить

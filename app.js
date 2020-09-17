@@ -9,10 +9,10 @@ var usersRouter = require('./routes/users');
 var newsRouter = require('./routes/news');
 var contactsRouter = require('./routes/contacts');
 var tripsRouter = require('./routes/trips');
+var adminRouter = require('./routes/admin');
 var workoutsRouter = require('./routes/workouts');
 var forumRouter = require('./routes/forum');
 var shopRouter = require('./routes/shop');
-
 
 var app = express();
 
@@ -31,6 +31,7 @@ app.use('/users', usersRouter);
 app.use('/contacts', contactsRouter);
 app.use('/news', newsRouter);
 app.use('/trips', tripsRouter);
+app.use('/admin', adminRouter);
 app.use('/workouts', workoutsRouter);
 app.use('/forum', forumRouter);
 app.use('/shop', shopRouter);
@@ -52,3 +53,5 @@ app.use(function(err, req, res, next) {
 });
 
 module.exports = app;
+app.locals.moment = require('moment');
+

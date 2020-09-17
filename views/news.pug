@@ -1,23 +1,36 @@
-extends layout
+﻿extends layout
 
 block content
-  <div class="container-fluid text-center news">
-  <div class="row">
-  <div class="col-10">
-  <form>
-  <div class="form-group text-border">
-  <label for="NewsList">Новости</label>
-  <textarea class="form-control " id="NewsList" rows="20"></textarea>
-  </div>
-  </form>
-  </div>
-  <div class="col-2">
-  <form>
-  <div class="form-group">
-  <label for="inputDate">Введите дату:</label>
-  <input type="date" class="form-control" id="inputDate">
-  </div>
-  </form>
-  </div>
-  </div>
-  </div>
+  div(class="container-fluid text-center news")
+    div(class="row")
+      div(class="col-10")
+          div(class="form-group text-border")
+            label(for="NewsList") Новости
+            - var mms = '';
+            - for (var x = 0; x < msg.length; x++)
+              div(class="card bg-primary text-white")
+                div(class="card-header text-left text-dark p-0")
+                  b #{moment(msg[x].date).format('L')+' '+msg[x].name.trim()}
+                div(class="card-body text-left p-2")
+                  p(class="card-text") #{msg[x].message.trim()}
+      div(class="col-2")
+        div(class="form-group")
+          label(for="inputDate") Введите дату:
+          input(type="date",class="form-control",id="inputDate")
+          button(type="button",class="btn btn-primary p-1 my-2",data-toggle="modal",data-target="#exampleModalCenter") Добавить новость
+          div(class="modal fade", id="exampleModalCenter", tabindex="-1", role="dialog", aria-labelledby="exampleModalCenterTitle", aria-hidden="true")
+            div(class="modal-dialog modal-dialog-centered", role="document")
+              div(class="modal-content")
+                form(method="post")
+                  div(class="modal-header")
+                    h5(class="modal-title",id="exampleModalLongTitle") Добавьте новость
+                    button(type="button", class="close", data-dismiss="modal", aria-label="Close")
+                      span(aria-hidden="true") &times
+                  div(class="modal-body text-left")
+                    label(for="username",class="col-form-label") Ваше имя:
+                    input(type="text", class="form-control", id="username" name="username")
+                    label(for="message", class="col-form-label") Сообщение
+                    textarea(class="form-control",id="message" name="message")
+                  div(class="modal-footer text left")
+                    button(type="button", class="btn btn-secondary", data-dismiss="modal") Закрыть
+                    button(type="submit", class="btn btn-primary") Сохранить
