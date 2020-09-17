@@ -3,13 +3,7 @@ var router = express.Router();
 router.get('/', function(req, res, next)
 {
   const {Client} = require('pg');
-  const db = new Client({
-        user: 'postgres',
-        host: 'localhost',
-        database: 'glamobase',
-        password: 'admin',
-        port: 5432
-    });
+  const db = new Client();
 
    db.connect();
    db.query('SELECT * FROM contacts', (err, data) => {

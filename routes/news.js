@@ -5,13 +5,7 @@ const urlencodedParser = bodyParser.urlencoded({extended: false});
 //Чтение из базы новостей и вывод на страницу
 router.get('/', function(req, res, next) {
   const {Client} = require('pg');
-  const db = new Client({
-    user: 'postgres',
-    host: 'localhost',
-    database: 'glamobase',
-    password: 'admin',
-    port: 5432
-  });
+  const db = new Client();
   db.connect();
   db.query('SELECT * FROM news', (err, data) => {
     if (err)
@@ -25,24 +19,16 @@ router.get('/', function(req, res, next) {
 router.post('/', urlencodedParser, function (req, res) {
   if(!req.body) return res.sendStatus(400);
   const {Client} = require('pg');
-  const db = new Client({
-    user: 'postgres',
-    host: 'localhost',
-    database: 'glamobase',
-    password: 'admin',
-    port: 5432
-  });
+  const db = new Client();
   var moment= require('moment');
   db.connect();
-  db.query("INSERT INTO news (date, name, message ) VALUES ('"+moment(Date()).format('DD.MM.YYYY')+"', '"+req.body.username+"', '"+req.body.message+"')", (err, data) => {
-    if (err)
-      throw new Error(err);
-    console.log(err);
-    db.end();
-  });
-  res.redirect('back');
-  //res.send(req.body.username+' '+ req.body.message);
+  db
+    .query(`INSERT INTO news (date, name, message ) VALUES ('${moment().format('DD.MM.YYYY')}', '${req.body.username}', '${req.body.message}')`)
+    .then(data=>{
+      res.redirect('back');
+      db.end();
+      })
+    .catch(err=>console.log(err))
 });
-
 
 module.exports = router;
