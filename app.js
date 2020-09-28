@@ -13,6 +13,7 @@ var adminRouter = require('./routes/admin');
 var workoutsRouter = require('./routes/workouts');
 var forumRouter = require('./routes/forum');
 var shopRouter = require('./routes/shop');
+var reguserRouter = require('./routes/reguser');
 
 var app = express();
 
@@ -35,6 +36,7 @@ app.use('/admin', adminRouter);
 app.use('/workouts', workoutsRouter);
 app.use('/forum', forumRouter);
 app.use('/shop', shopRouter);
+app.use('/reguser', reguserRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

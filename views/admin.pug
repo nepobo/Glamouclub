@@ -12,7 +12,9 @@ block content
               - if(tables != null)
                 - for (var x = 0; x < tables.length; x++)
                   option #{tables[x].table_name}
-            button(type="submit" class="btn btn-primary pull-right my-2" style="display: block; margin-left: auto;") Получить
+            div(class="text-right")
+              button(type="submit" id="getData" class="btn btn-primary my-2" ) Получить
+              button(type="submit" id="deleteData" formaction="/admin/del" class="btn btn-primary my-2 mx-2") Удалить
           div(class="form-group")
             label Данные таблицы
             table(class="table table-responsive")

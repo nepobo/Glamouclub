@@ -15,7 +15,8 @@ router.get('/', function(req, res, next) {
     db.end();
   });
 });
-//Запись в базу новостей
+
+//Writing to news base
 router.post('/', urlencodedParser, function (req, res) {
   if(!req.body) return res.sendStatus(400);
   const {Client} = require('pg');

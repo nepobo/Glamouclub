@@ -17,12 +17,13 @@ router.get('/', function(req, res, next) {
 
     })
     .catch(err=>console.log(err))
-  sql1 = `SELECT * FROM ${req.query.table}`;
+  if(req.query.table!=null) sql1 = `SELECT * FROM ${req.query.table}`
+  else sql1=``;
   db
     .query(sql1)
     .then(data=>{res.render('admin', {tables: data1, datainf: data});})
     .catch(err=>{
-      console.log(err.stack);
+      console.log(err);
       data=null;
       res.render('admin', {tables: data1, datainf: data});
       db.end();
@@ -34,10 +35,22 @@ router.get('/', function(req, res, next) {
 //Запись в базу новостей
 router.post('/', urlencodedParser, function (req, res) {
     if(!req.body) return res.sendStatus(400);
-
-    //${req.body.username}
-
-    //res.redirect('back');
     res.redirect("admin?table="+req.body.tablename);
+});
+router.post('/del', urlencodedParser, function (req, res) {
+    if(!req.body) return res.sendStatus(400);
+    const {Client} = require('pg');
+    const db = new Client();
+    db.connect();
+    if(req.body.tablename!=null) sql1=`delete FROM ${req.body.tablename}`
+    else sql1=``;
+    console.log(sql1);
+    db
+        .query(sql1)
+        .then(data=>{
+            res.redirect('back');
+
+        })
+        .catch(err=>console.log(err))
 });
 module.exports = router;
