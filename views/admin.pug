@@ -5,28 +5,64 @@ block content
     div(class="row")
       div(class="col-8 border border-dark rounded")
         h1 Администрирование сайта
-        form(method="post")
+        form(method="post" )
           div(class="form-group")
             label Выберите таблицу
-            select(class="form-control" id="TablesName" name="tablename")
-              - if(tables != null)
-                - for (var x = 0; x < tables.length; x++)
-                  option #{tables[x].table_name}
-            div(class="text-right")
-              button(type="submit" id="getData" class="btn btn-primary my-2" ) Получить
-              button(type="submit" id="deleteData" formaction="/admin/del" class="btn btn-primary my-2 mx-2") Удалить
+            div(class="dropdown")
+              button(class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false") Выбери базу
+              div(class="dropdown-menu" aria-labelledby="dropdownMenuButton" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 38px, 0px); top: 0px; left: 0px; will-change: transform;")
+                - if(tables != null)
+                  - for (var x = 0; x < tables.length; x++)
+                      a(class="dropdown-item" href=`admin?table=${tables[x].table_name}`) #{tables[x].table_name}
+            div(class="text-left")
+              input(type="hidden" name="tablename" id="tablename" value=`${curtable}`)
+              button(type="submit" id="deleteData" formaction="/admin/del" onclick="validAdmin(this);return false;" class="btn btn-primary my-2 mx-2") Очистить таблицу
+              button(type="button" id="delRow" class="btn btn-primary my-2 my-2" data-toggle="modal" data-target="#ModaldelRow") Удалить строку
+              div(class="modal fade" id="ModaldelRow" tabindex="-1" role="dialog" aria-labelledby="ModalCenterTitle", aria-hidden="true")
+                div(class="modal-dialog modal-dialog-centered" role="document")
+                  div(class="modal-content")
+                    form(method="post")
+                      div(class="modal-header")
+                        h5(class="modal-title" id="ModalLongTitle") Удаление строки из таблицы #{curtable}
+                        button(type="button" class="close" data-dismiss="modal" aria-label="Close")
+                          span(aria-hidden="true") &times
+                      div(class="modal-body text-left")
+                        label(for="idRow" class="col-form-label") Id удаляемой строки:
+                        input(type="text" class="form-control" id="idRow" name="idRow")
+                      div(class="modal-footer text left")
+                        button(type="button" class="btn btn-secondary" data-dismiss="modal") Закрыть
+                        button(type="submit" id="delRow" formaction="/admin/delRow" class="btn btn-primary") Удалить
+              button(type="button" id="addRow"  class="btn btn-primary my-2 mx-2" data-toggle="modal" data-target="#ModaladdRow") Добавить строку
+              div(class="modal fade" id="ModaladdRow" tabindex="-1" role="dialog" aria-labelledby="ModalCenterTitle", aria-hidden="true")
+                div(class="modal-dialog modal-dialog-centered" role="document")
+                  div(class="modal-content")
+                    form(method="post")
+                      div(class="modal-header")
+                        h5(class="modal-title" id="ModaladdTitle") Добавление строки в таблицу #{curtable}
+                        button(type="button" class="close" data-dismiss="modal" aria-label="Close")
+                          span(aria-hidden="true") &times
+                      div(class="modal-body text-left")
+                        input(type="hidden" name="curtable" id="curtable" value=`${curtable}`)
+                        - if(datainf != null)
+                          - for (var x = 0; x < datainf.fields.length; x++)
+                            - if(datainf.fields[x].name != "id")
+                                label(for=`${datainf.fields[x].name}` class="col-form-label") #{datainf.fields[x].name}:
+                                input(type="text" class="form-control" id=`${datainf.fields[x].name}` name=`${datainf.fields[x].name}`)
+                      div(class="modal-footer text left")
+                        button(type="button" class="btn btn-secondary" data-dismiss="modal") Закрыть
+                        button(type="submit" id="addRowModal" formaction="/admin/addRow" class="btn btn-primary") Добавить
           div(class="form-group")
-            label Данные таблицы
+            label(id="tt") Данные таблицы #{curtable}
             table(class="table table-responsive")
               thead(class="thead-dark")
                 th(scope="col") №
                 - if(datainf != null)
                   - for (var x = 0; x < datainf.fields.length; x++)
-                    th(scope="col") #{datainf.fields[x].name}
+                      th(scope="col") #{datainf.fields[x].name}
               tbody
                 - if(datainf != null)
                   - for (var x = 0; x < datainf.rows.length; x++)
-                    tr
-                    th(scope="row") #{x+1}
-                    - for (var y = 0; y< datainf.fields.length; y++)
-                      td #{datainf.rows[x][datainf.fields[y].name]}
+                      tr
+                      th(scope="row") #{x+1}
+                      - for (var y = 0; y< datainf.fields.length; y++)
+                          td #{datainf.rows[x][datainf.fields[y].name]}
