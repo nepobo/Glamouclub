@@ -67,6 +67,28 @@ body {
 .bot {
     color: aliceblue;
 }
+.reguser{
+    margin: 1em 2em;
+    position: relative;
+}
+
+.reguser h1{
+    margin: 1em 0em ;
+    color: black;
+    font-size: x-large;
+}
+.reguser label{
+    font-size:large;
+    color: black;
+}
+.reguser option{
+    color: red;
+    font-weight:bold;
+}
+.reguser select{
+    font-weight:bold;
+    color: blue;
+}
 .trips{
     margin: 1em 2em;
     position: relative;

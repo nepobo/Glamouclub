@@ -1,0 +1,28 @@
+﻿extends layout
+
+block content
+  div(class="container-fluid text-left reguser")
+    div(class="row")
+      div(class="col-6 border border-dark rounded")
+        div(class="modal fade" id="ErrWindow" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle", aria-hidden="true")
+          div(class="modal-dialog modal-dialog-centered" role="document")
+            div(class="modal-content")
+              div(class="modal-header")
+                a(id="alertmsg") Hello
+        div(class="form-group text-border")
+          h1 Регистрация пользователя
+          div(class="form-group")
+            - if(stat=="success")
+                a Регистрация пользователя прошла успешно
+            - else
+                form(name="reguser_form" method="post" onsubmit="validReguser(this);return false;")
+                  div
+                    label(for="login" class="col-form-label") Ваш логин:
+                    input(type="text" class="form-control" id="login" name="login")
+                    label(for="email" class="col-form-label") Email:
+                    input(type="text" class="form-control" id="email" name="email")
+                    label(for="password" class="col-form-label") Пароль
+                    input(class="form-control" id="password" name="password")
+                    label(for="checkpass" class="col-form-label") Потвердите пароль
+                    input(class="form-control" id="checkpass" name="checkpass")
+                    button(type="submit" class="btn btn-primary p-1 my-2") Регистрация
