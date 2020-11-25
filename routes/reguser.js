@@ -2,6 +2,40 @@ var express = require('express');
 var router = express.Router();
 const bodyParser = require("body-parser");
 const urlencodedParser = bodyParser.urlencoded({extended: false});
+const Sequelize = require("sequelize");
+const config =  {
+  username: process.env.PGUSER,
+  password: process.env.PGPASSWORD,
+  database: process.env.PGDATABASE,
+  host: process.env.PGHOST,
+  port: process.env.PGPORT,
+  dialect: 'postgres',
+  dialectOptions: {
+    multipleStatements: true
+  },
+  logging: console.log, // Включаем логи запросов
+  operatorsAliases: Sequelize.Op // Передаём алиасы параметров
+};
+const reguserattr = {
+  id: {
+    allowNull: false,
+    autoIncrement: true,
+    primaryKey: true,
+    type: Sequelize.DataTypes.INTEGER
+  },
+  login: {
+    allowNull: false,
+    type: Sequelize.DataTypes.STRING
+  },
+  email: {
+    allowNull: false,
+    type: Sequelize.DataTypes.STRING
+  },
+  passwrd: {
+    type: Sequelize.DataTypes.STRING,
+    allowNull: false
+  }
+}
 
 router.get('/', function(req, res, next) {
     status=req.query.status;
@@ -14,41 +48,32 @@ router.get('/', function(req, res, next) {
 //Проверка существования пользователя в БД
 router.get('/logincheck', function(req, res, next) {
     if(!req.body) return res.sendStatus(400);
-    login=req.query.login;
-    if(login!=null){
-      const {Client} = require('pg');
-      const db = new Client();
-      var moment= require('moment');
-      db.connect();
-      db
-      .query(`SELECT login FROM reguser WHERE login='${req.query.login}'`)
-      .then(data=>{
-        if(data.rows.length==0){
+    if(req.query.login!=null){
+      let sequelize = new Sequelize(config);
+      let regusers = sequelize.define('reguser', reguserattr , { timestamps: false });
+      regusers.findAll({attributes: ['login'], where: { login: [req.query.login] }, raw:true}).then(reqdata=>{
+        if(reqdata.length==0){
           res.send("notexist");
-          db.end();
         }
         else {
           res.send("exist");
-          db.end();
         }
-      })
-      .catch(err=>console.log(err))
+      }).catch(err=>console.log(err));
     };
 });
 
 // Writing to reguser base.
 router.post('/', urlencodedParser, function (req, res) {
-    if(!req.body) return res.sendStatus(400);
-    const {Client} = require('pg');
-    const db = new Client();
-    var moment= require('moment');
-    db.connect();
-    db
-      .query(`INSERT INTO reguser (login , email, passwrd ) VALUES ('${req.body.login}', '${req.body.email}', '${req.body.password}')`)
-      .then(data1 => {
-        res.redirect('reguser?status=success');
-        db.end();
-      })
-      .catch(err => console.log(err))
+  if(!req.body) return res.sendStatus(400);
+  let sequelize = new Sequelize(config);
+  let regusers = sequelize.define('reguser', reguserattr , { timestamps: false });
+  regusers.create({
+    login: req.body.login,
+    email: req.body.email,
+    passwrd: req.body.password
+  }).then(result=>{
+    res.redirect('reguser?status=success');
+  }).catch(err=>console.log(err));
+
 });
 module.exports = router;

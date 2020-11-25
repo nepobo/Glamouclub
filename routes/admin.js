@@ -16,8 +16,9 @@ router.get('/', function(req, res, next) {
         data1=data.rows;
 
     })
-    .catch(err=>console.log(err))
-  if(req.query.table!=null) sql1 = `SELECT * FROM ${req.query.table}`
+    .catch(err=>console.log(err));
+
+    if(req.query.table!=null) sql1 = `SELECT * FROM ${req.query.table}`
   else sql1=``;
   db
     .query(sql1)

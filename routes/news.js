@@ -2,34 +2,63 @@ var express = require('express');
 var router = express.Router();
 const bodyParser = require("body-parser");
 const urlencodedParser = bodyParser.urlencoded({extended: false});
-//Чтение из базы новостей и вывод на страницу
+const Sequelize = require("sequelize");
+const config =  {
+  username: process.env.PGUSER,
+  password: process.env.PGPASSWORD,
+  database: process.env.PGDATABASE,
+  host: process.env.PGHOST,
+  port: process.env.PGPORT,
+  dialect: 'postgres',
+  dialectOptions: {
+    multipleStatements: true
+  },
+  logging: console.log, // Включаем логи запросов, нужно передать именно функцию, либо false
+  operatorsAliases: Sequelize.Op // Передаём алиасы параметров
+};
+const newsattr = {
+  id: {
+    allowNull: false,
+    autoIncrement: true,
+    primaryKey: true,
+    type: Sequelize.DataTypes.INTEGER
+  },
+  date: {
+    type: Sequelize.DataTypes.DATE,
+    allowNull: false
+  },
+  name: {
+    type: Sequelize.DataTypes.STRING,
+    allowNull: false
+  },
+  message: {
+    type: Sequelize.DataTypes.STRING,
+    allowNull: false
+  }
+};
+
+//Reading from news table and out to page
 router.get('/', function(req, res, next) {
-  const {Client} = require('pg');
-  const db = new Client();
-  db.connect();
-  db.query('SELECT * FROM news', (err, data) => {
-    if (err)
-      throw new Error(err);
-    console.log(err);
-    res.render('news', {msg: data.rows});
-    db.end();
-  });
+  let sequelize = new Sequelize(config);
+  let News = sequelize.define('new', newsattr, { timestamps: false });
+  News.findAll({raw:true}).then(message=>{
+    res.render('news', {msg: message});
+  }).catch(err=>console.log(err));
 });
 
 //Writing to news base
 router.post('/', urlencodedParser, function (req, res) {
   if(!req.body) return res.sendStatus(400);
-  const {Client} = require('pg');
-  const db = new Client();
   var moment= require('moment');
-  db.connect();
-  db
-    .query(`INSERT INTO news (date, name, message ) VALUES ('${moment().format('DD.MM.YYYY')}', '${req.body.username}', '${req.body.message}')`)
-    .then(data=>{
-      res.redirect('back');
-      db.end();
-      })
-    .catch(err=>console.log(err))
+  let sequelize = new Sequelize(config);
+  let News = sequelize.define('new', newsattr, {timestamps: false});
+  News.create({
+    name: req.body.username,
+    message: req.body.message,
+    date: moment()
+  }).then(result=>{
+    res.redirect('back');
+  }).catch(err=>console.log(err));
 });
 
 module.exports = router;
